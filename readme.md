@@ -1,7 +1,7 @@
 Tubes IF3152 - Kelompok 6!
 ===================
 
-deploy at : <a href="if3152.herokuapp.com">if3152.herokuapp.com<a>
+deploy at : <a href="https://if3152.herokuapp.com/">if3152.herokuapp.com<a>
 
 ----------
 
@@ -45,4 +45,6 @@ Technology Use
 Laravel
 MySQL via db4free.net
 Heroku
+
+
 Created with ❤ with Laravel and Heroku from STI15
