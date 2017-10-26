@@ -21,7 +21,17 @@ Tugas besar IF3152 - Rekayasa Perangkat Lunak STI 2017. Aplikasi yang akan diban
 
 Human
 -------------------
-- STI 2017
+- Condro
+- Bimasakti
+- Irfan
+- Tessa
+- WIlliam
+- Shafwan
+
+Prasyarat
+-------------
+- Apache and PHP Client, the easy ways use XAMPP <a href="https://www.apachefriends.org/download.html">here</a> choose the PHP 7.0 or later
+- Composer, get it <a href="https://getcomposer.org/" >here</a>
 
 How to Use
 -------------
