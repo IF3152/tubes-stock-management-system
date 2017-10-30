@@ -1,22 +1,22 @@
-
 @extends('layouts.app')
 
 @section('content')
-
 <div class="container-fluid">
-<ol class="breadcrumb">
-    <li><a href="/admin">Admin</a></li>
-</ol>
-
     <div class="row">
-        <div class="col-md-12">
-           Halaman Admin
-			<ul>
-			<li><a href="{{route('kategori.index')}}">Kategori</a></li>
-			<li><a href="{{route('merek.index')}}">Merek</a></li>
-			<li><a href="{{route('supplier.index')}}">Supplier</a></li>
-			<li><a href="{{route('barang.index')}}">Barang</a></li>
-			</ul>
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Dashboard</div>
+
+                <div class="panel-body">
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    Admin broh!!
+                </div>
+            </div>
         </div>
     </div>
 </div>

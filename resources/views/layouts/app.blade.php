@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/linearicons/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/chartist/css/chartist-custom.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/alertify/css/alertify.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <!-- GOOGLE FONTS -->
@@ -102,7 +101,7 @@
             <div class="sidebar-scroll">
                 <nav>
                     <ul class="nav">
-                        <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Statistik</span></a></li>
+                        <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Statistic</span></a></li>
                         
                         <li>
                             <a href="#subPages" data-toggle="collapse" class="collapsed @yield('manajemen_act')"><i class="lnr lnr-file-empty"></i> <span>Barang</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
@@ -117,8 +116,8 @@
                             </div>
                         </li>
 
-                        <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Cabang</span></a></li>
-                        <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Order</span></a></li>
+                        <li><a href="{{route('cabang.index')}}" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Cabang</span></a></li>
+                        <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Pemesanan</span></a></li>
                         <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Pengaturan</span></a></li>
                     </ul>
                 </nav>
@@ -146,7 +145,6 @@
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('vendor/alertify/alertify.min.js') }}"></script>
-    <script src="{{ asset('vendor/chartist/js/chartist.min.js') }}"></script>
     <script src="{{ asset('scripts/klorofil-common.js') }}"></script>
     @yield('page-script')
 </body>
