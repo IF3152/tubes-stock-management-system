@@ -18,98 +18,102 @@ Human
 
 ##  Struktur dan Deskripsi Modul
 Modul - modul
-1. **User dan Password** 
->>> #### Table User
->>>| Field | Type |
->>>|--|--|
->>>| id  | increment  |
->>>| name  | string  |
->>>| email  | string  |
->>>| password  | string  |
->>>| isAdmin | integer (0..1)  |
->>> Note : Modul ini tidak perlu dibuat karena sudah diimplementasikan secara otomatis oleh laravel dengan perintah
->>>````
->>> php artisan make:auth
->>>````
-2. **Barang** ( Sub modul : Barang, Merek, Kategori, Supplier, Stok ). 
->> Note : untuk barang ada sedikit perubahan struktur database
->>> #### Table Barang
->>>| Field | Type |
->>>|--|--|
->>>| id  | increment  |
->>>| nama  | string  |
->>>| kategori_id  | integer (belongTo Kategori.id)  |
->>>| merek_id  | integer  (belongTo Merek.id)|
->>>| supplier_id  | integer (belongTo Supplier.id) |
->>>| berat  | double  |
->>>| deskripsi  | string  |
->>>| sku | string  |
->>>| harga  | double  |
->>>| stok  | integer (default:0)  |
->>> #### Table Kategori
->>>| Field | Type |
->>>|--|--|
->>>| id  | increment  |
->>>| nama  | string  |
->>> #### Table Merek
->>>| Field | Type |
->>>|--|--|
->>>| id  | increment  |
->>>| nama  | string  |
->>> #### Table Supplier
->>>| Field | Type |
->>>|--|--|
->>>| id  | increment  |
->>>| nama  | string  |
->>>| alamat  | string  |
->>>| telp  | string  |
->>> #### Table Stok
->>>| Field | Type |
->>>|--|--|
->>>| id  | increment  |
->>>| barang_id  | unsigned integer foreign key on barang(id) cascade on delete  |
->>>| stok_masuk  | integer  |
->>>| stok_keluar  | integer  |
->>>| admin_id | integer (belongTo user.id)  |
->>>| deskripsi  | integer  |
-3. Cabang ( termasuk relasi user dan cabang )
->>> #### Table Cabang
->>>| Field | Type |
->>>|--|--|
->>>| id  | increment  |
->>>| nama  | string  |
->>>| alamat  | string  |
->>>| telp  | string  |
->>> #### Table User Role ( User manajer dari Cabang)
->>>| Field | Type |
->>>|--|--|
->>>| id  | increment  |
->>>| user_id  | unsigned integer foreign key on user(id) cascade on delete  |
->>>| cabang_id  | unsigned integer foreign key on cabang(id) cascade on delete  |
->>>| ditetapkan_oleh  | integer (belongTo user.id)  |
+### 1. **User dan Password** 
+ #### Table User
+| Field | Type |
+|--|--|
+| id  | increment  |
+| name  | string  |
+| email  | string  |
+| password  | string  |
+| isAdmin | integer (0..1)  |
 
- 4. Pemesanan
- >>> #### Table Pemesanan
->>>| Field | Type |
->>>|--|--|
->>>| id  | increment  |
->>>| cabang_id  |  integer belongTo cabang.id  |
->>>| kode_pemesanan | string  |
->>>|harga| double |
->>>|status| integer (-1, 0, 1) |
->>>Note : status **-1: batal**, **0:proses**, **1:suskses**
- 6. Detail Pemesanan 
-  >>> #### Table Detail Pemesanan
->>>| Field | Type |
->>>|--|--|
->>>| id  | increment  |
->>>| pemesanan_id  |  integer belongTo pemesanan.id  |
->>>| barang_id | integer belongTo barang.id  |
->>>| harga_satuan | double |
->>>| qty | integer |
->>>| harga_total | double |
- 7. Modul Notifikasi dan Emailing menggunakan webpush referensi di https://github.com/laravel-notification-channels/webpush
- 8. Modul  Dashboard 
+>Note : Modul ini tidak perlu dibuat karena sudah diimplementasikan secara otomatis oleh laravel dengan perintah
+````
+ php artisan make:auth
+````
+### 2. **Barang** ( Sub modul : Barang, Merek, Kategori, Supplier, Stok ). 
+>Note : untuk barang ada sedikit perubahan struktur database
+ #### Table Barang
+| Field | Type |
+|--|--|
+| id  | increment  |
+| nama  | string  |
+| kategori_id  | integer (belongTo Kategori.id)  |
+| merek_id  | integer  (belongTo Merek.id)|
+| supplier_id  | integer (belongTo Supplier.id) |
+| berat  | double  |
+| deskripsi  | string  |
+| sku | string  |
+| harga  | double  |
+| stok  | integer (default:0)  |
+
+ #### Table Kategori
+| Field | Type |
+|--|--|
+| id  | increment  |
+| nama  | string  |
+ #### Table Merek
+| Field | Type |
+|--|--|
+| id  | increment  |
+| nama  | string  |
+ #### Table Supplier
+| Field | Type |
+|--|--|
+| id  | increment  |
+| nama  | string  |
+| alamat  | string  |
+| telp  | string  |
+ #### Table Stok
+| Field | Type |
+|--|--|
+| id  | increment  |
+| barang_id  | unsigned integer foreign key on barang(id) cascade on delete  |
+| stok_masuk  | integer  |
+| stok_keluar  | integer  |
+| admin_id | integer (belongTo user.id)  |
+| deskripsi  | integer  |
+### 3. Cabang ( termasuk relasi user dan cabang )
+ #### Table Cabang
+| Field | Type |
+|--|--|
+| id  | increment  |
+| nama  | string  |
+| alamat  | string  |
+| telp  | string  |
+ #### Table User Role ( User manajer dari Cabang)
+| Field | Type |
+|--|--|
+| id  | increment  |
+| user_id  | unsigned integer foreign key on user(id) cascade on delete  |
+| cabang_id  | unsigned integer foreign key on cabang(id) cascade on delete  |
+| ditetapkan_oleh  | integer (belongTo user.id)  |
+
+ ### 4. Pemesanan
+ #### Table Pemesanan
+| Field | Type |
+|--|--|
+| id  | increment  |
+| cabang_id  |  integer belongTo cabang.id  |
+| kode_pemesanan | string  |
+|harga| double |
+|status| integer (-1, 0, 1) |
+>Note : status **-1: batal**, **0:proses**, **1:suskses**
+ 
+ ### 5. Detail Pemesanan 
+ #### Table Detail Pemesanan
+| Field | Type |
+|--|--|
+| id  | increment  |
+| pemesanan_id  |  integer belongTo pemesanan.id  |
+| barang_id | integer belongTo barang.id  |
+| harga_satuan | double |
+| qty | integer |
+| harga_total | double |
+ ### 7. Modul Notifikasi dan Emailing 
+Menggunakan webpush referensi di https://github.com/laravel-notification-channels/webpush
+ ### 8. Modul  Dashboard 
 
 # Membangun Sistem
 ## Glosary
@@ -128,71 +132,82 @@ Hal - hal dasar tentang laravel
 Sekiranya itu yang akan digunakan untuk pembangunan sistem ini. Jika error silakan tanya, atau googling juga lumayan banyak forum laravel.
 
 ## Prasyarat
-Install software berikut :
 - Knowledge of MVC (Model view controller)
-- Apache and PHP Client, the easy ways use XAMPP <a href="https://www.apachefriends.org/download.html">here</a> choose the PHP 7.0 or later.
->>Jika sudah install XAMPP tapi php masih 5.6, diharapkan untuk uninstall dan install kembali untuk XAMPP dengan PHP 7.0
-- Composer, get it <a href="https://getcomposer.org/" >here</a>
-- Git, <a href="https://git-scm.com/download/win"> here </a>
-> **Pastikan Program Program tersebut berjalan:**
+- Install software berikut :
+>- Apache and PHP Client, the easy ways use XAMPP <a href="https://www.apachefriends.org/download.html">here</a> choose the PHP 7.0 or later.
+>Jika sudah install XAMPP tapi php masih 5.6, diharapkan untuk uninstall dan install kembali untuk XAMPP dengan PHP 7.0
+>- Composer, get it <a href="https://getcomposer.org/" >here</a>
+> - Git, <a href="https://git-scm.com/download/win"> here </a>
+
+**Pastikan Program Program tersebut berjalan:**
 
 > - Jalankan XAMPP ( Apache dan MySQL )
 > - Cek Composer melalui cmd, dengan perintah 
->> ````
->> composer
->> ````
+> ````
+> composer
+> ````
 > - Cek Git melalui cmd, dengan perintah
->> ````
->> git
->> ````
+> ````
+> git
+> ````
 
 # Langkah-langkah
-## Persiapan Awal
+## Persiapan Awal (only for the first-timer)
 Lakukan langkah-langkah berikut melalui cmd
- 1. Clone the git ( only for the first-timer)
->>````
->>git clone https://github.com/IF3152/tubes-stock-management-system.git
->>````
+ 1. Clone the git 
+>````
+>git clone https://github.com/IF3152/tubes-stock-management-system.git
+>````
  2. Pindah ke folder tubes-stock-management-system
->>````
->> cd tubes-stock-management-system
->>````
+>````
+> cd tubes-stock-management-system
+>````
  3. Buat file .env dengan cara mengkopi file .env.example
->>````
->> copy .env.example .env
->>````
+>````
+> copy .env.example .env
+>````
  4. Instal aplikasi dengan composer
->>````
->>composer install
->>````
+>````
+>composer install
+>````
  5. Generate APP_KEY dengan perintah
->>````
->> php artisan key:generate
->>````
+>````
+> php artisan key:generate
+>````
  6. Buat database baru di alamat <a href="http://localhost/phpmyadmin">localhost/phpmyadmin</a> 
  7. Buka editor kesayangan Anda (disarankan menggunakan Sublime, Atom, Geany, Notepad++)
  8. Buka folder dari di Editor, arahkan ke folder tadi
  9. Edit bagian DB berikut dari file .env
->>````
->>DB_CONNECTION=mysql
->>DB_HOST=127.0.0.1
->>DB_PORT=3306
->>DB_DATABASE="NAMA_DATABASE KALIAN (dibuat dilangkah 6)"
->>DB_USERNAME="USERNAME_MYSQL_KALIAN"
->>DB_PASSWORD="PASSWORD_MYSQL_KALIAN"
->>```` 
+>````
+>DB_CONNECTION=mysql
+>DB_HOST=127.0.0.1
+>DB_PORT=3306
+>DB_DATABASE="NAMA_DATABASE KALIAN (dibuat dilangkah 6)"
+>DB_USERNAME="USERNAME_MYSQL_KALIAN"
+>DB_PASSWORD="PASSWORD_MYSQL_KALIAN"
+>```` 
  10. Update database dari yang sudah ada dengan perintah. Perintah ini akan membuat tabel-tabel baru di mySQL kalian dan akan menambahkan beberapa record baru di database kalian. bisa di cek melalui phpmyadmin 
- >>````
- >>php artisan migrate
- >>php artisan db:seed
- >>````
+>````
+>php artisan migrate
+>php artisan db:seed
+>````
  11. Sajikan website secara lokal dengan perintah
- >>````
- >>php artisan serve
- >>````
+ >````
+ >php artisan serve
+ >````
 
 
 ## Mulai ngodingnya
+### Pull dulu dari git
+1. Buka cmd, dan arahkan ke folder kerja kita
+````
+git pull
+````
+2. Jalankan migrasi
+````
+php artisan migrate
+````
+
 ### Membuat CRUD untuk Kategori ( dalam Modul Barang )
 1.  Buka Windows Explorer. Masuk ke direktori kita misalnya di simpan di drive D, masuk ke
 >````
@@ -206,7 +221,9 @@ Lakukan langkah-langkah berikut melalui cmd
 4. Edit file migration tersebut di **database/migration/------create_kategori.php**. 
 Edit pada bagian berikut ini untuk menentukan field tabel
 ````php
-            Schema::create('kategori', function (Blueprint $table) {
+		public function up()
+    	{
+        Schema::create('kategori', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->string('nama',155)->nullable();

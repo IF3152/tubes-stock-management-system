@@ -107,16 +107,16 @@
                             <a href="#subPages" data-toggle="collapse" class="collapsed @yield('manajemen_act')"><i class="lnr lnr-file-empty"></i> <span>Barang</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                             <div id="subPages" class="collapse">
                                 <ul class="nav">
-                                    <li><a href="{{route('barang.index')}}">Semua Barang</a></li>
-                                    <li><a href="{{route('kategori.index')}}">Kategori</a></li>
-                                    <li><a href="{{route('merek.index')}}">Merek</a></li>
-                                    <li><a href="{{route('supplier.index')}}">Supplier</a></li>
+                                    <li><a href="#">Semua Barang</a></li>
+                                    <li><a href="#">Kategori</a></li>
+                                    <li><a href="#">Merek</a></li>
+                                    <li><a href="#">Supplier</a></li>
                                     
                                 </ul>
                             </div>
                         </li>
 
-                        <li><a href="{{route('cabang.index')}}" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Cabang</span></a></li>
+                        <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Cabang</span></a></li>
                         <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Pemesanan</span></a></li>
                         <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Pengaturan</span></a></li>
                     </ul>
