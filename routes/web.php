@@ -21,6 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/sample-mail', 'MailController@sample');
 
+Route::resource('cabang', 'CabangsController');
+
 //KELOMPOK ADMIN
 Route::group(['prefix' => 'admin', 'middleware' => ['admin'] ], function(){
 	Route::get('/', function () {
