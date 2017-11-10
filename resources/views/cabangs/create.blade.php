@@ -1,16 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Pendaftaran Cabang Baru</h1>
-    @if(count($cabangs) > 0)
-        @foreach($cabangs as $cabang)
-            <!-- Belum ada Form -->
-            <div class="well">
-                <h3><a href="cabang/{{$cabang->id}}">{{$cabang->nama}}</a></h3>
-                <small>Created at: {{$cabang->created_at}}</small>
-            </div>
-        @endforeach
-    @else
-        <p> Belum ada cabang yang dimasukkan </p>
-    @endif
+    <!-- Laravel Collective -->
+    {!! Form::open(['action' => 'CabangsController@store', 'method' => 'POST']) !!}
+        <div class='form-group'>
+            {{Form::label('nama', 'Nama')}}
+            {{Form::text('nama', '', ['class' => 'form-control', 'placeholder' => 'Nama'])}}
+        </div>
+        <div class='form-group'>
+            {{Form::label('alamat', 'Alamat')}}
+            {{Form::text('alamat', '', ['class' => 'form-control', 'placeholder' => 'Alamat'])}}
+        </div>
+        <div class='form-group'>
+            {{Form::label('telp', 'Telp')}}
+            {{Form::text('telp', '', ['class' => 'form-control', 'placeholder' => 'Telp'])}}
+        </div>
+        {{Form::button('Submit', ['type' => 'submit', 'class'=>'btn btn-primary'])}}
+    {!! Form::close() !!}
 @endsection

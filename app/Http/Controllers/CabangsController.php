@@ -12,11 +12,12 @@ class CabangsController extends Controller
      *
      * @return void
      */
+    /*
     public function __construct()
     {
         $this->middleware('auth');
     }
-
+*/
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +31,7 @@ class CabangsController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
+     * * /cabang/create
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -46,18 +47,28 @@ class CabangsController extends Controller
      */
     public function store(Request $request)
     {
+        
+        
         $this->validate($request, [
             'nama' => 'required',
+            'alamat' => 'required',
+            'telp' => 'required',
         ]);
         
-        $tambah = new \App\Cabang();
-        $tambah->nama =  $request['nama'];
+        $tambah = new Cabang();
+        
+        $tambah->nama =  $request->input('nama');
+        $tambah->alamat =  $request->input('alamat');
+        $tambah->telp =  $request->input('telp');
+
         $tambah->save();
+
+        return redirect('/cabang');
     }
 
     /**
      * Display the specified resource.
-     *
+     * /cabang/$id/
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -69,13 +80,19 @@ class CabangsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
+     * /cabang/$id/edit
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $cabang = Cabang::find($id);
+        // Check for correct user
+        //if(auth()->user()->id !== $post->user_id){
+        //    return redirect('/posts')->with('error', 'Unauthorized page');
+        //}
+
+        return view('cabangs.edit')->with('cabang', $cabang);
     }
 
     /**
@@ -87,7 +104,27 @@ class CabangsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'nama' => 'required',
+            'alamat' => 'required',
+            'telp' => 'required',
+        ]);
+        // Create Cabang
+        $cabang = Cabang::find($id);
+        
+        if(count($cabang)>0){
+            
+            $cabang->nama = $request->input('nama');
+            $cabang->alamat = $request->input('alamat');
+            $cabang->telp = $request->input('telp');
+            
+            $cabang->save();
+        }
+        else{
+            echo "No data";
+        }
+
+        return redirect('/cabang');
     }
 
     /**
@@ -98,6 +135,16 @@ class CabangsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // 
+        $cabang = Cabang::find($id);
+        
+        if(count($cabang)>0){
+            $cabang->delete();
+        }
+        else{
+            echo "No data";
+        }
+
+        return redirect('/cabang');
     }
 }
