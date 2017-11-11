@@ -26,6 +26,6 @@ Route::resource('cabang', 'CabangsController');
 //KELOMPOK ADMIN
 Route::group(['prefix' => 'admin', 'middleware' => ['admin'] ], function(){
 	Route::get('/', function () {
-    	return view('admin.index');
+	return view('admin.index');
 	});
 });
