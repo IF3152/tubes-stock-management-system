@@ -17,20 +17,21 @@ class UsersRoles extends Migration
             'users_roles',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('user_id');
-                $table->foreign('user_id')
+                $table->integer('user_id')
+                    ->foreign('user_id')
                     ->unsigned()
-                    ->refrences('id')->on('user')
+                    ->references('id')->on('users')
                     ->onDelete('cascade');
-                $table->integer('cabang_id');
-                $table->foreign('cabang_id')
+                $table->integer('cabang_id')
+                    ->foreign('cabang_id')
                     ->unsigned()
-                    ->refrences('id')->on('cabang')
+                    ->references('id')->on('cabangs')
                     ->onDelete('cascade');
                 $table->integer('ditetapkan_oleh')
                     ->unsigned()
-                    ->refrences('id')->on('user')
+                    ->references('id')->on('users')
                     ->onDelete('SET NULL');
+                $table->timestamps();
             }
         );
     }

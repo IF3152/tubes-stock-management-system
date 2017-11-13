@@ -14,6 +14,8 @@
                         </div>
                     @endif
 
+                    <a href="/admin/user/" class="btn btn-success">User List</a>
+                    <br>
                     Admin broh!! <!-- Wut? -->
                 </div>
             </div>
