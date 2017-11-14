@@ -25,9 +25,14 @@ Route::resource('cabang', 'CabangsController');
 
 //KELOMPOK ADMIN
 Route::group(['prefix' => 'admin', 'middleware' => ['admin'] ], function(){
-	Route::get('/', function () {
-		return view('admin.index');
-	});
+	Route::get('/', function () {return view('admin.index');})->name('adminpage');
 	Route::resource('/user', 'AdminUserController');
-	
+	Route::resource('kategori','Kategori');
+	Route::resource('merek','Merek');
+	Route::resource('supplier','Supplier');
+	Route::resource('barang','Barang');
+	//Stok Barang Thins
+	Route::get('stok-barang/{id}','Barang@StokBarangIndex')->name('stok-barang');
+	Route::get('stok-barang/{id}/create','Barang@StokBarangCreate')->name('stok-barang-create');
+	Route::post('stok-barang/{id}/store','Barang@StokBarangStore')->name('stok-barang-store');
 });

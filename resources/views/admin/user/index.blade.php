@@ -16,7 +16,7 @@
                 {!! Form::close() !!}
                 <br>
                 <small>Cabang : 
-                    @if (count($userrole->cabang($user))>0)
+                    @if (!empty($userrole))
                         {{$userrole->cabang($user)->nama}}
                     @else
                         Belum ada
