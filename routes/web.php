@@ -35,4 +35,23 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin'] ], function(){
 	Route::get('stok-barang/{id}','Barang@StokBarangIndex')->name('stok-barang');
 	Route::get('stok-barang/{id}/create','Barang@StokBarangCreate')->name('stok-barang-create');
 	Route::post('stok-barang/{id}/store','Barang@StokBarangStore')->name('stok-barang-store');
+
+	//Perubahan Status Pemesanan
+	Route::get('pemesanan', 'Pemesanan@Admin')->name('pemesanan-admin');
+	Route::get('pemesanan/{id}', 'Pemesanan@GantiStatusView')->name('ganti-status-view');
+	Route::patch('pemesanan/{id}', 'Pemesanan@GantiStatusStore')->name('ganti-status-store');
+
+});
+
+Route::group(['middleware' => ['usercabang'] ], function(){
+	Route::resource('pemesanan','Pemesanan');
+	Route::post('/pemesanan/{id}', 'Pemesanan@Finish')->name('pemesanan-finish');
+
+	Route::get('/pemesanan/rincian/{id}', 'Pemesanan@Rincian')->name('rincian');
+
+	Route::post('/pemesanan/rincian/{id}', 'RincianPemesanan@store')->name('rincian-store');
+	Route::delete('/pemesanan/rincian/{id}', 'RincianPemesanan@destroy')->name('rincian-store');
+	//JSON
+	Route::get('rincianpemesanan/{id}', 'RincianPemesanan@show');
+	Route::get('semuabarang', 'RincianPemesanan@all');
 });

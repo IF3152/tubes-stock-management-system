@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.notifiers')
 
 @section('content')
 <div class="container-fluid">

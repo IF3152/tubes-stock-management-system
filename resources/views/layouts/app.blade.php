@@ -116,8 +116,8 @@
                         </li>
 
                         <li><a href="{{route('cabang.index')}}" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Cabang</span></a></li>
-                        <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Pemesanan</span></a></li>
-                        <li><a href="{{route('adminpage')}}" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Pengaturan</span></a></li>
+                        <li><a href="{{route('pemesanan.index')}}" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Pemesanan</span></a></li>
+                        <li><a href="{{route('adminpage')}}" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Administrasi</span></a></li>
                     </ul>
                 </nav>
             </div>
