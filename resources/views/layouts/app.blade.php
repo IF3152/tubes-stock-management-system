@@ -11,11 +11,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
 <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/linearicons/style.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/alertify/css/alertify.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/chartist/css/chartist.min.css') }}">
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
     <!-- Scripts -->
@@ -102,6 +103,7 @@
             <div class="sidebar-scroll">
                 <nav>
                     <ul class="nav">
+                        @if (Auth::user()->isAdmin==1)
                         <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Statistic</span></a></li>
                         
                         <li>
@@ -117,8 +119,11 @@
                         </li>
 
                         <li><a href="{{route('cabang.index')}}" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Cabang</span></a></li>
-                        <li><a href="{{route('pemesanan.index')}}" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Pemesanan</span></a></li>
+                       
                         <li><a href="{{route('adminpage')}}" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Administrasi</span></a></li>
+                        @else
+                         <li><a href="{{route('pemesanan.index')}}" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Pemesanan</span></a></li>
+                         @endif
                     </ul>
                 </nav>
             </div>
@@ -145,6 +150,7 @@
     
     <script src="/js/app.js"></script>
     <script src="{{ asset('vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ asset('vendor/chartist/js/chartist.min.js') }}"></script>
     <script src="{{ asset('vendor/alertify/alertify.min.js') }}"></script>
     <script src="{{ asset('scripts/klorofil-common.js') }}"></script>
     @yield('page-script')
