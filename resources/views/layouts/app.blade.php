@@ -104,7 +104,7 @@
                 <nav>
                     <ul class="nav">
                         @if (Auth::user()->isAdmin==1)
-                        <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Statistic</span></a></li>
+                        <li><a href="/home" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Statistic</span></a></li>
                         
                         <li>
                             <a href="#subPages" data-toggle="collapse" class="collapsed @yield('manajemen_act')"><i class="lnr lnr-file-empty"></i> <span>Barang</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
