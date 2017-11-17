@@ -3,7 +3,8 @@
 @section('content')
     <h1>Edit Cabang</h1>
     @if(count($cabang) > 0)
-            {!! Form::open(['action' => ['CabangsController@update', $cabang->id], 'method' => 'POST']) !!}    <div class='form-group'>
+            {!! Form::open(['action' => ['CabangsController@update', $cabang->id], 'method' => 'POST']) !!}    
+                <div class='form-group'>
                     {{Form::label('nama', 'Nama')}}
                     {{Form::text('nama', '', ['class' => 'form-control', 'placeholder' => 'Nama'])}}
                 </div>
