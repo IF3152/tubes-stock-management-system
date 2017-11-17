@@ -29,6 +29,7 @@
                     <thead>
                     <tr>
                         <td>Cabang ID</td>
+                        <td>Tanggal Order</td>
                         <td>Kode Pemesanan</td>
                         <td>Total</td>
                         <td>Status</td>
@@ -40,6 +41,8 @@
                     @foreach ($data as $data)
                     <tr>
                         <td>{{$data->cabangnya->nama}} </td>
+                        <td><span class="need_to_be_rendered" datetime="{{$data->created_at}}">{{$data->created_at}}</span>
+                             </td>
                         <td>{{$data->kode_pemesanan}} </td>
                         <td>{{$data->harga}} </td>
                         <td>
@@ -121,6 +124,7 @@ $(document).ready(function() {
     @if (session()->has('pesan'))
     alertify.success("{{ (string)Session::get('pesan') }}");
     @endif
+    timeago().render($('.need_to_be_rendered'));
 </script>
 
 <script type="text/javascript">
@@ -133,4 +137,5 @@ $('table[data-form="deleteForm"]').on('click', '.form-delete', function(e){
         });
 });
 </script>
+
 @endsection

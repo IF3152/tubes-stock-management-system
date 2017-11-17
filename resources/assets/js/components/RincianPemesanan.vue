@@ -3,21 +3,19 @@
         <h4>Tambah Barang</h4>
         <form action="#" @submit.prevent="createBarang()">
             <div class="row">
-                <div class="col-md-4">
-                    <select v-model="barang.barang_id" name="barang_id"  class="form-control" >
-                        <option selected="selected">Pilih Barang</option>
+                <div class="col-xs-4">
+                    <select v-model="barang.barang_id" name="barang_id"  class="form-control" autofocus>
                         <option v-for="(allBarang, index) in listBarang" v-bind:value="allBarang.id">
                             {{ allBarang.nama }}
                         </option>
                     </select>
                                 
                 </div>
-                
 
-                <div class="col-md-4">
-                <input placeholder="Quantity" v-model="barang.qty" type="text" name="qty" class="form-control" autofocus>
+                <div class="col-xs-4">
+                <input placeholder="Quantity" v-model="barang.qty" type="text" name="qty" class="form-control" >
                 </div>
-                <div class="col-md-4">
+                <div class="col-xs-4">
                 <button type="submit" class="btn btn-primary">New Barang</button>
                 </div>
             </div>

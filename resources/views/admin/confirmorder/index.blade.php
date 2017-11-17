@@ -22,6 +22,18 @@
 
     <div class="row">
         <div class="col-md-12">
+            @foreach ($barang as $runout)
+            @if ($runout->stok <= 10)
+            <div class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+              <b>{{$runout->nama}}</b>  akan segera habis. Silakan melakukan pengadaan baru <a href="{{url('/admin/stok-barang',$runout->id)}}">disini</a> 
+            </div>
+            @else
+            @endif
+            @endforeach
+        </div>
+        <div class="col-md-12">
                 <a href="{{route('pemesanan.create')}}" class="btn btn-success pull-right"> BUAT BARU</a>
                 <div class="">
                     <div class="table">
@@ -29,6 +41,7 @@
                     <thead>
                     <tr>
                         <td>Cabang ID</td>
+                        <td>Tanggal Order</td>
                         <td>Kode Pemesanan</td>
                         <td>Total</td>
                         <td>Status</td>
@@ -40,6 +53,7 @@
                     @foreach ($data as $data)
                     <tr>
                         <td>{{$data->cabangnya->nama}} </td>
+                        <td>{{$data->created_at}} </td>
                         <td>{{$data->kode_pemesanan}} </td>
                         <td>{{$data->harga}} </td>
                         <td>

@@ -11,6 +11,18 @@
 <a title='Return'  href="{{route('pemesanan-admin')}}" ><i class='fa fa-chevron-circle-left '></i> &nbsp; Kembali ke Pemesanan</a>
 
     <div class="row">
+    	        <div class="col-md-12">
+            @foreach ($barang as $runout)
+            @if ($runout->stok <= 10)
+            <div class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+              <b>{{$runout->nama}}</b>  akan segera habis. Silakan melakukan pengadaan baru <a href="{{url('/admin/stok-barang',$runout->id)}}">disini</a> 
+            </div>
+            @else
+            @endif
+            @endforeach
+        </div>
         <div class="col-md-12">
              <div class="panel panel-default">
                 <div class="panel-heading">Kode Pemesanan : {{$data->kode_pemesanan}}</div>
@@ -70,12 +82,19 @@
                         </tfoot>
                     </table>
                     <div>
-                    	@if ($data->status!=1)
-                    	<form class="form-horizontal" role="form" method="POST" action="{{ route('ganti-status-store', $data->id) }}">
+                    	@if ($data->status==0)
+                    	<form style="display: inline-block;" class="form-horizontal" role="form" method="POST" action="{{ route('ganti-status-store', $data->id) }}">
 		                {{ csrf_field() }}
 		                <input name="_method" type="hidden" value="PATCH">
                             <button type="submit" class="btn btn-success">
                                 Setuju
+                            </button>
+		                </form> 
+		                <form style="display: inline-block;" class="form-horizontal" role="form" method="POST" action="{{ route('ganti-status-decline', $data->id) }}">
+		                {{ csrf_field() }}
+		                <input name="_method" type="hidden" value="PATCH" >
+                            <button type="submit" class="btn btn-danger">
+                                Batalkan
                             </button>
 		                </form> 
 		                @else

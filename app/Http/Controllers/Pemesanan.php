@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\User;
 
 class Pemesanan extends Controller
 {
@@ -15,7 +16,7 @@ class Pemesanan extends Controller
     public function index()
     {
         $cabang = \App\UserRole::where('user_id', Auth::user()->id)->first();
-         $data = \App\Pemesanan::where('cabang_id', $cabang->id)->get();
+         $data = \App\Pemesanan::where('cabang_id', $cabang->id)->latest()->get();
         
         return view('order.index',compact('data'));
     }
@@ -130,10 +131,10 @@ class Pemesanan extends Controller
     public function Admin()
     {
         
-        $data = \App\Pemesanan::all();
+        $data = \App\Pemesanan::latest()->get();
+        $barang = \App\Barang::where('stok','<=',10)->get();
 
-
-        return view('admin.confirmorder.index', compact('data')) ;
+        return view('admin.confirmorder.index', compact('data','barang')) ;
         
     }
     public function GantiStatusView($id)
@@ -141,7 +142,8 @@ class Pemesanan extends Controller
         
         $data = \App\Pemesanan::findOrFail($id);
         $rincian = \App\RincianPemesanan::where('pemesanan_id',$id)->get();
-        return view('admin.confirmorder.show', compact('data', 'rincian'));
+        $barang = \App\Barang::where('stok','<=',10)->get();
+        return view('admin.confirmorder.show', compact('data', 'rincian','barang'));
         
     }
 
@@ -149,22 +151,26 @@ class Pemesanan extends Controller
     {
         $data = \App\Pemesanan::findOrFail($id);
         $rincian = \App\RincianPemesanan::where('pemesanan_id',$id)->get();
-
-        $flag = 0;
+        $arr_rincian = $rincian->toArray();
+        $flag = false;
         $stoknya = 0;
+        $i = 0;
+        //return $arr_rincian[0]['qty'];
+        
 
-        foreach ($rincian as $r) {
-            $stok = \App\Barang::where('id', $r->barang_id)->first();
-            if ($stok->stok >= $r->qty) {
-                $flag = 0;
+        while (!$flag && $i <= (count($arr_rincian)-1) ) {
+            $stok = \App\Barang::where('id', $arr_rincian[$i]['barang_id'])->first();
+            
+            if ($stok->stok >= $arr_rincian[$i]['qty']) {
+                $i++;
             } else {
-                $flag = 1;
+                $flag = true;
             }
-        }
-
+        } 
+        
         $pesan = '';
 
-        if ($flag==0) {
+        if ($flag==false) {
             foreach ($rincian as $r) {
                 $stok = \App\Barang::where('id', $r->barang_id)->first();
                     $stok->stok = $stok->stok - $r->qty;
@@ -183,8 +189,26 @@ class Pemesanan extends Controller
         //return $stoknya;
         return redirect()->route('pemesanan-admin')->with('pesan',$pesan);
 
+        
+    }
+     public function GantiStatusDecline(Request $request, $id)
+    {
+        $data = \App\Pemesanan::findOrFail($id);
+        $rincian = \App\RincianPemesanan::where('pemesanan_id',$id)->get();
+
+            
+        $pesan = 'Pesanan Ditolak' ;
+        $data->status = -1;
+        $data->save();
+
+        return redirect()->route('pemesanan-admin')->with('pesan',$pesan);
+
        
         
     }
+    public function notifications()
+     {
+         return Auth::user()->unreadNotifications()->limit(5)->get()->toArray();
+     }
 
 }

@@ -15,7 +15,7 @@
 </ol>
 
     <div class="row" >
-        <div class="col-md-12" id='app'>
+        <div class="col-md-12">
             <rincian-pemesanan></rincian-pemesanan>
             <form class="form-horizontal" role="form" method="POST" action="{{ route('pemesanan-finish',$data->id) }}">
                 {{ csrf_field() }}
@@ -28,5 +28,5 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/app.js') }}"></script>
+
 @endsection

@@ -40,7 +40,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['admin'] ], function(){
 	Route::get('pemesanan', 'Pemesanan@Admin')->name('pemesanan-admin');
 	Route::get('pemesanan/{id}', 'Pemesanan@GantiStatusView')->name('ganti-status-view');
 	Route::patch('pemesanan/{id}', 'Pemesanan@GantiStatusStore')->name('ganti-status-store');
+	Route::patch('pemesanan-decline/{id}', 'Pemesanan@GantiStatusDecline')->name('ganti-status-decline');
 
+});
+Route::group(['middleware' => ['auth'] ], function(){
+	Route::get('notifications', 'Pemesanan@notifications');
 });
 
 Route::group(['middleware' => ['usercabang'] ], function(){
