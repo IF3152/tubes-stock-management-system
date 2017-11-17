@@ -135,7 +135,7 @@
                                 <div class="panel-footer">
                                     <div class="row">
                                         <div class="col-md-6"><span class="panel-note"><i class="fa fa-clock-o"></i> Last 24 hours</span></div>
-                                        <div class="col-md-6 text-right"><a href="{{route('pemesanan-admin')}}" class="btn btn-primary">View All Purchases</a></div>
+                                        <div class="col-md-6 text-right"><a href="{{route('pemesanan-admin')}}" class="btn btn-primary">Semua Pesanan</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -177,7 +177,7 @@
                                 <div class="panel-footer">
                                     <div class="row">
                                         <div class="col-md-6"><span class="panel-note"><i class="fa fa-clock-o"></i> Last 24 hours</span></div>
-                                        <div class="col-md-6 text-right"><a href="{{route('barang.index')}}" class="btn btn-primary">View All Purchases</a></div>
+                                        <div class="col-md-6 text-right"><a href="{{route('barang.index')}}" class="btn btn-primary">Semua Barang</a></div>
                                     </div>
                                 </div>
                             </div>

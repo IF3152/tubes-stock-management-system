@@ -49,8 +49,10 @@ class HomeController extends Controller
         $cabang = \App\Cabang::all();
         $pemesananselesai = \App\Pemesanan::where('status',1)->get(); 
         $pemesanan = \App\Pemesanan::all();
-        
-        $persen = (count($pemesananselesai) / count($pemesanan)) * 100;
+        $persen = 0;
+        if (count($pemesanan)>0)
+            $persen = (count($pemesananselesai) / count($pemesanan)) * 100;
+
         $pemesananbulan = \App\Pemesanan::whereMonth('created_at', '=', date('m'))->get();
 
         $pendapatanbulan = 0;
