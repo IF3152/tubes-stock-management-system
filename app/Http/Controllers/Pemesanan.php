@@ -16,7 +16,7 @@ class Pemesanan extends Controller
     public function index()
     {
         $cabang = \App\UserRole::where('user_id', Auth::user()->id)->first();
-         $data = \App\Pemesanan::where('cabang_id', $cabang->id)->latest()->get();
+         $data = \App\Pemesanan::where('cabang_id', $cabang->cabang_id)->latest()->get();
         
         return view('order.index',compact('data'));
     }
