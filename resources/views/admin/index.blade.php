@@ -3,9 +3,9 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Menu Administrasi</div>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -13,10 +13,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    <a href="/admin/user/" class="btn btn-success">User List</a>
+                    <ul>
+                        <li><a href="/admin/user/" >User List</a></li>
+                        <li><a href="{{route('pemesanan-admin')}}" >Tampilkan Pemesanan</a></li>
                     <br>
-                    Admin broh!! <!-- Wut? -->
+                    
                 </div>
             </div>
         </div>

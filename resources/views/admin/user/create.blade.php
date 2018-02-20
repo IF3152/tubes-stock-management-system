@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="col-md-8 col-md-offset-2">
     <!-- Laravel Collective -->
     {!! Form::open(['action' => 'AdminUserController@store', 'method' => 'POST']) !!}
         <div class='form-group'>
@@ -14,4 +15,5 @@
         </div>
         {{Form::button('Submit', ['type' => 'submit', 'class'=>'btn btn-primary'])}}
     {!! Form::close() !!}
+</div>
 @endsection

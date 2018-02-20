@@ -29,5 +29,9 @@ class UserRole extends Model
         }
         return $cabang;
     }
+
+    public function cabangnya() {
+        return $this->belongsTo('\App\Cabang', 'cabang_id', 'id');
+    }
     
 }

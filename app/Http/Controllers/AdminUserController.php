@@ -28,7 +28,7 @@ class AdminUserController extends Controller
      * * /cabang/create
      * @return \Illuminate\Http\Response
      */
-    /*
+    
     public function create()
     {
         $cabangs = Cabang::all();
@@ -39,7 +39,7 @@ class AdminUserController extends Controller
 
         return view('admin.user.create', compact('cabang_map'));        
     }
-    */
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -91,7 +91,7 @@ class AdminUserController extends Controller
     {
         $cabangs = Cabang::all();
         $user = User::find($id);
-        
+
         foreach($cabangs as $cabang){ 
             $cabang_map[$cabang->id] = $cabang->nama;
         }

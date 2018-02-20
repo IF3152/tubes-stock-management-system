@@ -11,13 +11,26 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
 <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/linearicons/style.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/alertify/css/alertify.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/chartist/css/chartist.min.css') }}">
     <!-- GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- Scripts -->
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
+    <!-- This makes the current user's id available in javascript -->
+    @if(!auth()->guest())
+        <script>
+            window.Laravel.userId = <?php echo auth()->user()->id; ?>
+        </script>
+    @endif
 
     @yield('page-css')
 
@@ -42,29 +55,18 @@
                 </form>
                 <div id="navbar-menu">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
-                                <i class="lnr lnr-alarm"></i>
-                                <span class="badge bg-danger">5</span>
-                            </a>
-                            <ul class="dropdown-menu notifications">
-                                <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
-                                <li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
-                                <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
-                                <li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
-                                <li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
-                                <li><a href="#" class="more">Clear Notification</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Basic Use</a></li>
-                                <li><a href="#">Working With Data</a></li>
-                                <li><a href="#">Security</a></li>
-                                <li><a href="#">Troubleshooting</a></li>
-                            </ul>
-                        </li>
+                        <!-- // add this dropdown // -->
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" id="notifications" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <i class="lnr lnr-alarm"></i>
+                                    
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="notificationsMenu" id="notificationsMenu">
+                                    <li class="dropdown-header">No notifications</li>
+                                </ul>
+                            </li>
+
+                        
                         <!-- Authentication Links -->
                         @guest
                             <li><a href="{{ route('login') }}">Login</a></li>
@@ -101,24 +103,27 @@
             <div class="sidebar-scroll">
                 <nav>
                     <ul class="nav">
-                        <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Statistic</span></a></li>
+                        @if (Auth::user()->isAdmin==1)
+                        <li><a href="/home" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Statistic</span></a></li>
                         
                         <li>
                             <a href="#subPages" data-toggle="collapse" class="collapsed @yield('manajemen_act')"><i class="lnr lnr-file-empty"></i> <span>Barang</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                             <div id="subPages" class="collapse">
                                 <ul class="nav">
-                                    <li><a href="#">Semua Barang</a></li>
-                                    <li><a href="#">Kategori</a></li>
-                                    <li><a href="#">Merek</a></li>
-                                    <li><a href="#">Supplier</a></li>
-                                    
+                                    <li><a href="{{route('barang.index')}}">Semua Barang</a></li>
+                                    <li><a href="{{route('kategori.index')}}">Kategori</a></li>
+                                    <li><a href="{{route('merek.index')}}">Merek</a></li>
+                                    <li><a href="{{route('supplier.index')}}">Supplier</a></li>
                                 </ul>
                             </div>
                         </li>
 
-                        <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Cabang</span></a></li>
-                        <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Pemesanan</span></a></li>
-                        <li><a href="#" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Pengaturan</span></a></li>
+                        <li><a href="{{route('cabang.index')}}" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Cabang</span></a></li>
+                       
+                        <li><a href="{{route('adminpage')}}" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Administrasi</span></a></li>
+                        @else
+                         <li><a href="{{route('pemesanan.index')}}" class="@yield('statistic_act')"><i class="lnr lnr-chart-bars"></i> <span>Pemesanan</span></a></li>
+                         @endif
                     </ul>
                 </nav>
             </div>
@@ -126,7 +131,7 @@
         <!-- END LEFT SIDEBAR -->
         <!-- MAIN -->
         <div class="main">
-            <div class="main-content">
+            <div class="main-content" id="app">
                 @yield('content')
             </div>
         </div>
@@ -141,9 +146,11 @@
     </div>
     <!-- END WRAPPER -->
     <!-- Javascript -->
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    
+    
+    <script src="/js/app.js"></script>
     <script src="{{ asset('vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ asset('vendor/chartist/js/chartist.min.js') }}"></script>
     <script src="{{ asset('vendor/alertify/alertify.min.js') }}"></script>
     <script src="{{ asset('scripts/klorofil-common.js') }}"></script>
     @yield('page-script')

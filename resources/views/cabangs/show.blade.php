@@ -6,7 +6,7 @@
         <!-- Go to Edit Page -->
         <a href="/cabang/{{$cabang->id}}/edit" class="btn btn-success">Edit</a>
         <!-- Delete -->
-        {!! Form::open(['action'=> ['CabangsController@destroy', $cabang->id], 'method' => 'POST']) !!}
+        {!! Form::open(['style' => 'display: inline-block'],['action'=> ['CabangsController@destroy', $cabang->id], 'method' => 'POST']) !!}
             {{Form::hidden('_method', 'DELETE')}}
             {{Form::button('Delete', ['type' => 'submit', 'class'=>'btn btn-danger'])}}
         {!! Form::close() !!}

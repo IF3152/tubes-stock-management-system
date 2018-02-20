@@ -17,14 +17,12 @@ class UsersRoles extends Migration
             'users_roles',
             function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('user_id')
-                    ->foreign('user_id')
-                    ->unsigned()
+                $table->integer('user_id')->unsigned();
+                $table->foreign('user_id')
                     ->references('id')->on('users')
                     ->onDelete('cascade');
-                $table->integer('cabang_id')
-                    ->foreign('cabang_id')
-                    ->unsigned()
+                $table->integer('cabang_id')->unsigned();
+                $table->foreign('cabang_id')
                     ->references('id')->on('cabangs')
                     ->onDelete('cascade');
                 $table->integer('ditetapkan_oleh')

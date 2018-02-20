@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+<ol class="breadcrumb">
+    <li><a href="{{route('cabang.index')}}">Cabang</a></li>
+</ol>
+
     <h1>Daftar Cabang</h1>
     <a href="/cabang/create" class="btn btn-default">Create</a>
     @if(count($cabangs) > 0)

@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use \App\Pemesanan;
+use App\Observers\PemesananObserver;
+use \App\Barang;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +18,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+        Pemesanan::observe(PemesananObserver::class);
+        Barang::observe(BarangObserver::class);
     }
 
     /**

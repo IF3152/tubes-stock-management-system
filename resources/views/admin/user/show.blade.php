@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="col-md-8 col-md-offset-2">
     @if(count($user) > 0)
         <h1>{{$user->name}}</h1>
         <!-- Go to Edit Page -->
@@ -20,4 +21,5 @@
     @else
         <p> Cabang tidak ditemukan</p>
     @endif
+</div>
 @endsection
